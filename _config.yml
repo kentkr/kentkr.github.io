@@ -16,7 +16,7 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Site Title"
+title                    : "My portfolio homepage"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Kyle Kent"
@@ -126,6 +126,9 @@ author:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
+    - label: "Linkedin"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/kyle-kent321/"
 
 # Site Footer
 footer:
