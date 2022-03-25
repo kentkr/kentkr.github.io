@@ -1,4 +1,5 @@
 ---
+permalink: /chocolate-cookies/
 title: "Chocolate Chip Cookies"
 ---
 
