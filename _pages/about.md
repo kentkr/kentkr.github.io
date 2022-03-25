@@ -1,6 +1,7 @@
 ---
 title: "About me"
 permalink: /about/
+type: pages
 layout: single
 author_profile: true
 ---
