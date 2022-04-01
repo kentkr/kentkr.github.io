@@ -2,8 +2,10 @@
 main:
   - title: "About me"
     url: https://kentkr.github.io/about/
-  # - title: "Sample Posts"
-  #   url: /year-archive/
+  - title: "Divinity"
+    url: /divinity/
+  - title: "Publications"
+    url: /publications/
   # - title: "Sample Collections"
   #   url: /collection-archive/
   # - title: "Sitemap"
