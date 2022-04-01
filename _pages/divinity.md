@@ -1,5 +1,5 @@
 ---
-permalink: /about/
+permalink: /divinity/
 type: pages
 layout: single
 author_profile: true

@@ -1,0 +1,19 @@
+---
+output:
+  md_document:
+    variant: gfm
+---
+
+# Introduction to divinity
+
+Divinity is a trading algorithm
+
+```{python}
+import argparse
+import pandas as pd
+from matplotlib import pyplot as plt
+import pandas_ta as ta
+import numpy as np
+import code
+
+```
