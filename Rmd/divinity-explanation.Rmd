@@ -1,0 +1,70 @@
+---
+output:
+  md_document:
+    variant: gfm
+---
+
+```{r}
+library(data.table)
+library(ggplot2)
+
+dt <- fread('~/Library/CloudStorage/Dropbox/divinity/output/backtestTSLAOutcome.csv')[,-1:-2]
+# only include cross points if they fall outside of CIs
+dt[crossY <= yhat_lower | crossY >= yhat_upper, `:=` (actionDate = crossDate, 
+                                                      actionY = crossY)]
+# same thing here but exclude them if they're not the first upper/lower cross
+dt[grp != 1, `:=` (actionDate = NA, 
+                   actionY = NA)]
+
+plotDt <- dt[ds >= '2021-01-01' & ds <= '2022-01-01']
+```
+
+# Introduction to divinity
+
+```{r}
+ggplot(plotDt) +
+  labs(title = 'Example of divinity in action over the past year', 
+       subtitle = 'Ticker = TSLA') +
+  xlab('Date') +
+  ylab('Price per share (USD)') +
+  geom_point(mapping = aes(x = ds, y = y, color = 'Actual TSLA price')) +
+  geom_line(mapping = aes(x = ds, y = yhat, color = 'Predicted TSLA price')) +
+  geom_ribbon(mapping = aes(x = ds, 
+                            ymin = yhat_lower, ymax = yhat_upper, fill = 'Predicted price CIs'), 
+              alpha = .3) +
+  geom_line(mapping = aes(x = ds, y = maFast, color = '3 day moving average')) +
+  geom_line(mapping = aes(x = ds, y = maSlow, color = '5 day moving average')) +
+  geom_point(mapping = aes(x = actionDate, y = actionY, color = 'Buy or sell signal'), 
+             color = 'red') +
+  scale_color_manual(values = c('Actual TSLA price' = 'black', 
+                                'Predicted TSLA price' = 'cornflowerblue'), 
+                     guide = guide_legend(overide.aes = list(linetype = c('blank', 'solid'), 
+                                                             shape = c(16, 2)))) +
+  scale_fill_manual(values = c('Predicted price CIs' = 'cornflowerblue'))
+```
+
+Divinity is a trading algorithm I developed with the ultimate goal of improving my python and software engineering skills, while teaching me more about investing. Here, I'll walk you through my decision making in developing divinity and why certain design choices were made.
+
+Before we get started, my current boss (Doug Ruderfer) has some guiding principles that highly impacted the development of this algorithm: do the easiest thing possible with the highest impact. That is to say that every aspect of this project will be difficult so the easiest next step will tend to be the most impactful. This is roughly Occams razor. Following these principles, I designed divinity to be modular and iterable to allow for ease of integrating new and improved version of the algorithm. These themes will come up multiple times in the following document.
+
+# Data collection
+
+Getting consistent, reliable, and low-latency price data is not cheap since they are gatekeeped by large financial institutions. This was a blessing in disguise since using live intra-day data is complicated and that goes against the principles outlined above. Instead, daily close and open price can acquired from python's yfinance library. This approach has a lot of downstream benefits that will keep things simple and can be changed as the model is developed further.
+
+```{r}
+
+```
+# Statistical theories underlying divinity
+
+There are many approaches we can take to model price changes in the value of a stock, but some are more complicated than others. Instead of building a convolutional neural network from scratch to predict 1 minute price changes, I wanted to use something more straightforward. In comes regression to the mean (also called mean reversion).
+
+Regression to the mean in it's simplest terms is the idea that extreme values will return to average over time. For example, if you randomly sampled 10 IQs from US highschool students and their average score was 130 (the top 97.5% of the population), then there is an increased likelihood the next 10 students' IQ will be closer to the mean of 100.
+
+# Time series prediction
+
+To implement a mean reversion strategy I decided on using a prebuilt, well validated, univariate time series prediction model (ARIMA). The best choice was Facebook's Prophet model. The model will produce confidence intervals (a range of values for the predicted value based on a probablity we specify) that we can use to indicate that the price is well above or well below the mean, ie extreme. Although prophet is techinically a "prediction" model, no future forecasting will be done. All we need is a prediction of the current priceand signals for regression to the mean to predict price changes.
+
+
+
+
+
