@@ -9,10 +9,11 @@ always_allow_html: true
 knitr::opts_chunk$set(echo = F)
 ```
 
-```{r echo = F}
+```{r}
 library(data.table)
 library(ggplot2)
 library(plotly)
+library(htmlwidgets)
 
 dt <- fread('~/Library/CloudStorage/Dropbox/divinity/output/backtestTSLAOutcome.csv')[,-1:-2]
 # only include cross points if they fall outside of CIs
@@ -56,7 +57,8 @@ plt <- ggplot(dt) +
          fill = guide_legend(title = '')) +
   theme_minimal()
 
-ggplotly(plt)
+saveWidget(ggplotly(plt), 
+           file = '/Users/kylekent/Library/CloudStorage/Dropbox/kentkr.github.io/assets/images/2022-04-06-Divinity-explanation_files/figure-gfm/plotlyPlt.html')
 ```
 
 Before we get started, my current boss (Doug Ruderfer) has some guiding principles that highly impacted the development of this algorithm: do the easiest thing possible with the highest impact. That is to say every aspect of this project will be difficult, so the easiest next step will tend to be the most impactful. This is roughly Occams razor. Following these principles, I designed divinity to be modular and iterable to allow for ease of integrating new and improved version of the algorithm. These themes will come up multiple times in this post.
@@ -118,8 +120,8 @@ When looking at the plot above it is clear that having the price fall above or b
 
 Calculating the point at which the points cross comes down to calculating when two lines cross. Add these to the algorithm and you have the current final iteration.
 
-```{r}
-ggplot(dt) +
+```{r echo = F, warning = F}
+ggplot(plotDt) +
   labs(title = 'Full divinity model over the past year for TSLA stock') +
   xlab('Date') +
   ylab('Price per share (USD)') +
