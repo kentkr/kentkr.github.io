@@ -2,15 +2,17 @@
 output:
   md_document:
     variant: gfm
+always_allow_html: true
 ---
 
-```{r, setup, include=FALSE}
+```{r, setup, include = F, echo = F, warning = F}
 knitr::opts_chunk$set(echo = F)
 ```
 
 ```{r echo = F}
 library(data.table)
 library(ggplot2)
+library(plotly)
 
 dt <- fread('~/Library/CloudStorage/Dropbox/divinity/output/backtestTSLAOutcome.csv')[,-1:-2]
 # only include cross points if they fall outside of CIs
@@ -27,9 +29,11 @@ plotDt <- dt[ds >= '2021-01-01' & ds <= '2022-01-01']
 
 Divinity is a trading algorithm I developed with the ultimate goal of improving my python and software engineering skills, while teaching me more about investing. It works by using a univariate time series prediction model to predict the current days price of a security (ie, a stock). Confidence intervals (CIs) are built around the prediction which are used to indicate if a price is impropable, or in other words, extreme. When the price is extreme (it falls outside of the CIs) it is expected to eventually return closer to the predicted value. To indicate this change in price, two moving averages (one faster than the other) are used and a cross indicates a buy or a sell. In the rest of this document I'll walk you through my decision making in developing divinity and why certain design choices were made.
 
+It was written all in Python and is executed daily at market close using an AWS EC2 instance with a cron-job.
+
 ```{r}
-ggplot(plotDt) +
-  labs(title = 'Full divinity model over the past year for TSLA stock') +
+plt <- ggplot(dt) +
+  labs(title = 'Full divinity model over the past five years for TSLA stock') +
   xlab('Date') +
   ylab('Price per share (USD)') +
   geom_point(mapping = aes(x = ds, y = y, color = 'Actual TSLA close price')) +
@@ -40,7 +44,7 @@ ggplot(plotDt) +
   geom_line(mapping = aes(x = ds, y = maFast, color = '3 day moving average')) +
   geom_line(mapping = aes(x = ds, y = maSlow, color = '5 day moving average')) +
   geom_point(mapping = aes(x = actionDate, y = actionY, color = 'Buy or sell signal')) +
-  scale_color_manual(values = c('TSLA close price' = 'black', 
+  scale_color_manual(values = c('Actual TSLA close price' = 'black', 
                                 'Predicted TSLA close price' = 'cornflowerblue', 
                                 '3 day moving average' = 'darkorange1',
                                 '5 day moving average' = 'green4', 
@@ -51,6 +55,8 @@ ggplot(plotDt) +
                                                   linetype = c('blank', 'solid', 'solid', 'solid', 'blank'))), 
          fill = guide_legend(title = '')) +
   theme_minimal()
+
+ggplotly(plt)
 ```
 
 Before we get started, my current boss (Doug Ruderfer) has some guiding principles that highly impacted the development of this algorithm: do the easiest thing possible with the highest impact. That is to say every aspect of this project will be difficult, so the easiest next step will tend to be the most impactful. This is roughly Occams razor. Following these principles, I designed divinity to be modular and iterable to allow for ease of integrating new and improved version of the algorithm. These themes will come up multiple times in this post.
@@ -63,7 +69,7 @@ Close price was selected for a few reasons, but mostly ease of use. In brief, pr
 
 ```{r}
 ggplot(plotDt) +
-  labs(title = 'TSLA close price ') +
+  labs(title = 'TSLA close price') +
   xlab('Date') +
   ylab('Price per share (USD)') +
   geom_point(mapping = aes(x = ds, y = y, color = 'Actual TSLA price')) +
@@ -88,7 +94,7 @@ Although facebook's prophet model is techinically a "prediction" model, no forec
 
 ```{r}
 ggplot(plotDt) +
-  labs(title = 'Full divinity model over the past year for TSLA stock') +
+  labs(title = 'Prediction model in the divinity algorithm over the past year for TSLA stock') +
   xlab('Date') +
   ylab('Price per share (USD)') +
   geom_point(mapping = aes(x = ds, y = y, color = 'Actual TSLA close price')) +
@@ -108,9 +114,9 @@ ggplot(plotDt) +
 
 # Signal detection
 
-When looking at the plot above it is clear that having the price fall above or below the CIs is not a clear enough signal for price change. To remedy this, I used two technical indicators in a cross-strategy as a signal. One is an average of the last 3 days, the other an average of the last 5 days. When they cross it indicates a change in price and therefore a signal to buy or sell. 
+When looking at the plot above it is clear that having the price fall above or below the CIs is not a clear enough signal for price change. To remedy this, I used two technical indicators in a cross-strategy as a signal. One is an average of the last 3 days, the other an average of the last 5 days. When they cross it indicates a change in price and therefore a signal to buy or sell. Typically a cross-strategy is either overly sensitve or too conservative, but when pairing it with the confidence intervals of the prediction model, this should be less of an issue.
 
-Add the moving averages to the model, then detect when they cross, and you have the final algorithm.
+Calculating the point at which the points cross comes down to calculating when two lines cross. Add these to the algorithm and you have the current final iteration.
 
 ```{r}
 ggplot(dt) +
@@ -125,7 +131,7 @@ ggplot(dt) +
   geom_line(mapping = aes(x = ds, y = maFast, color = '3 day moving average')) +
   geom_line(mapping = aes(x = ds, y = maSlow, color = '5 day moving average')) +
   geom_point(mapping = aes(x = actionDate, y = actionY, color = 'Buy or sell signal')) +
-  scale_color_manual(values = c('TSLA close price' = 'black', 
+  scale_color_manual(values = c('Actual TSLA close price' = 'black', 
                                 'Predicted TSLA close price' = 'cornflowerblue', 
                                 '3 day moving average' = 'darkorange1',
                                 '5 day moving average' = 'green4', 
@@ -138,3 +144,12 @@ ggplot(dt) +
   theme_minimal()
 ```
 
+# Logistics of executing the model
+
+Divinity is currently automated by using an AWS EC2 instance. The program is executed daily before market close using a cron-job. It was initially run by hand every day before open for basic testing.
+
+The algorithm uses a service called Alpaca, which is similar to Robin hood, to execute trades. It has no service fees, uses a simple API for sending and receiving information, and allows for paper testing using fake money in real time. Of course, "free" services are never free and Alpaca is making money using my info in more discrete ways. But this is a simple and easy method to get started.
+
+# Model performance
+
+To explore the performance of the model you will need to read another post on my website. That post is being created at the moment but will be ready soon. It will be linked here when ready and elsewhere on the website. Make sure to check back soon and thanks for reading!
