@@ -3,6 +3,7 @@ permalink: /publications/
 type: pages
 layout: single
 author_profile: true
+classes: wide
 ---
 
 Kent, K. R., Hopfer, C. J., Corley, R. P., & Stallings, M. C. (2022). Executive functions as a mediator of childhood maltreatment on adult psychopathology: A longitudinal mediation analysis comparing maltreatment factor models. Child Abuse & Neglect, 123, 105369. https://doi.org/10.1016/j.chiabu.2021.105369

@@ -285,7 +285,6 @@ defaults:
   - scope:
       path: ""
       type: posts
-      classes: wide
     values:
       layout: single
       author_profile: true
@@ -293,12 +292,9 @@ defaults:
       comments: # true
       share: true
       related: true
-      classes: wide
   # _pages
   - scope:
       type: posts
-      classes: wide
     values:
       layout: single
       author_profile: true
-      classes: wide

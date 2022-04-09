@@ -1,3 +1,7 @@
+---
+classes: wide
+---
+
 # Introduction to divinity
 
 Divinity is a trading algorithm I developed with the ultimate goal of
