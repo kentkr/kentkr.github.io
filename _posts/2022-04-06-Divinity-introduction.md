@@ -99,7 +99,7 @@ Calculating the point at which the points cross comes down to
 calculating when two lines cross. Add these to the algorithm and you
 have the current final iteration.
 
-![](assets/images/2022-04-06-Divinity-introduction_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](/assets/images/2022-04-06-Divinity-introduction_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 # Logistics of executing the model
 
