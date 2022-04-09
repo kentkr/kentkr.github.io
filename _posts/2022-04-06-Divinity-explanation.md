@@ -48,7 +48,8 @@ need for a more complex buy/sell algorithm to maximize gains if the
 spread is wide. This will be modified in the future.
 
 ![](/assets/images/2022-04-06-Divinity-explanation_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
-\# Statistical theories underlying divinity
+
+# Statistical theories underlying divinity
 
 There are many approaches we can take to model price changes in the
 value of a stock, but some are more complicated than others. Instead of
