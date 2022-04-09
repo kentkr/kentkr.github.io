@@ -16,7 +16,7 @@ and why certain design choices were made.
 It was written all in Python and is executed daily at market close using
 an AWS EC2 instance with a cron-job.
 
-<iframe src="/assets/images/2022-04-06-Divinity-explanation_files/figure-gfm/plotlyPlothtml" height="600px" width="100%" style="border:none;"></iframe>
+<iframe src="/assets/images/2022-04-06-Divinity-explanation_files/figure-gfm/plotlyPlt.html" height="600px" width="100%" style="border:none;"></iframe>
 
 Before we get started, my current boss (Doug Ruderfer) has some guiding
 principles that highly impacted the development of this algorithm: do
