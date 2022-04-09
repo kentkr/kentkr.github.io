@@ -3,9 +3,8 @@ permalink: /about/
 type: pages
 layout: single
 author_profile: true
+classes: wide
 ---
-
-# About me
 
 My career entry into data science and engineering was not necessarily out of the ordinary, but I did not expect to end up here. It came about by a few constants in my life: a desire to learn, an analytical mindset, and an unrivaled passion for new things. These three traits helped me to graduate Summa Cum Laude with a Bachelors in Psychology from CU Boulder, publish two academic papers in genetics and child abuse, and develop an automated trading algorithm. If you're interested in learning more about these accomplishments then please browse the posts and pages of this website. 
 
