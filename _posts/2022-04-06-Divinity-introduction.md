@@ -46,7 +46,7 @@ drastically pre-market open. Using the close price reduces the immediate
 need for a more complex buy/sell algorithm to maximize gains if the
 spread is wide. This will be modified in the future.
 
-![](/Users/kylekent/Library/CloudStorage/Dropbox/kentkr.github.io/assets/images/2022-04-06-Divinity-introduction_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](/assets/images/2022-04-06-Divinity-introduction_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 # Statistical theories underlying divinity
 
@@ -81,7 +81,7 @@ funds can’t predict future prices then it’s too complicated for me. All
 we need is a prediction of the current price and a little statistical
 theory.
 
-![](/Users/kylekent/Library/CloudStorage/Dropbox/kentkr.github.io/assets/images/2022-04-06-Divinity-introduction_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](/assets/images/2022-04-06-Divinity-introduction_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 # Signal detection
 
@@ -99,7 +99,7 @@ Calculating the point at which the points cross comes down to
 calculating when two lines cross. Add these to the algorithm and you
 have the current final iteration.
 
-![](/Users/kylekent/Library/CloudStorage/Dropbox/kentkr.github.io/assets/images/2022-04-06-Divinity-introduction_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](assets/images/2022-04-06-Divinity-introduction_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 # Logistics of executing the model
 
