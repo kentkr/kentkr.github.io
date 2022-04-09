@@ -5,4 +5,6 @@ layout: single
 author_profile: true
 ---
 
-Publications
+{% include figure image_path="/assets/images/publications/can.png" %}
+
+{% include figure image_path="/assets/images/publications/substanceAbuse.png" %}
