@@ -26,8 +26,6 @@ dt[grp != 1, `:=` (actionDate = NA,
 plotDt <- dt[ds >= '2021-01-01' & ds <= '2022-01-01']
 ```
 
-# Introduction to divinity
-
 Divinity is a trading algorithm I developed with the ultimate goal of improving my python and software engineering skills, while teaching me more about investing. It works by using a univariate time series prediction model to predict the current days price of a security (ie, a stock). Confidence intervals (CIs) are built around the prediction which are used to indicate if a price is impropable, or in other words, extreme. When the price is extreme (it falls outside of the CIs) it is expected to eventually return closer to the predicted value. To indicate this change in price, two moving averages (one faster than the other) are used and a cross indicates a buy or a sell. In the rest of this document I'll walk you through my decision making in developing divinity and why certain design choices were made.
 
 It was written all in Python and is executed daily at market close using an AWS EC2 instance with a cron-job.
@@ -58,8 +56,10 @@ plt <- ggplot(dt) +
   theme_minimal()
 
 saveWidget(ggplotly(plt), 
-           file = '/Users/kylekent/Library/CloudStorage/Dropbox/kentkr.github.io/assets/images/2022-04-06-Divinity-explanation_files/figure-gfm/plotlyPlt.html')
+           file = '/Users/kylekent/Library/CloudStorage/Dropbox/kentkr.github.io/assets/images/2022-04-06-Divinity-introduction_files/figure-gfm/plotlyPlt.html')
 ```
+
+<iframe src="/assets/images/2022-04-06-Divinity-explanation_files/figure-gfm/plotlyPlt.html" height="600px" width="100%" style="border:none;"></iframe>
 
 Before we get started, my current boss (Doug Ruderfer) has some guiding principles that highly impacted the development of this algorithm: do the easiest thing possible with the highest impact. That is to say every aspect of this project will be difficult, so the easiest next step will tend to be the most impactful. This is roughly Occams razor. Following these principles, I designed divinity to be modular and iterable to allow for ease of integrating new and improved version of the algorithm. These themes will come up multiple times in this post.
 
