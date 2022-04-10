@@ -8,7 +8,7 @@ classes: wide
 
 Divinity is a trading algorithm built from scratch that uses two technical indicators and facebook's prophet model (hence the name, divinity) to employ a mean reversion strategy.The goal of building divinity was not to make money but to improve my software egineering and data science skills. To learn more about it please see the links below.
 
-[Introduction to divinity](https://kentkr.github.io/Divinity-explanation/)
+[Introduction to divinity](https://kentkr.github.io/Divinity-introduction/)
 
 # Legal disclaimer
 
