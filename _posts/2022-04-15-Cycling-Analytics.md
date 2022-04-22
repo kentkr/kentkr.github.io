@@ -316,7 +316,7 @@ all_rides_avgs.dtypes.apply(lambda x: x.name).to_dict()
 all_rides_avgs.to_csv('/Users/kylekent/Desktop/research/CS_misc/GitHub/strava_project/all_rides_avgs2.csv.gz', index = False, compression = 'gzip')
 ```
 
-# Plotting GPS data with plotly
+# Plotting rides with ggplot
 
 Originally I planned to show interactive plots of a GPS heatmap for all my rides. Sadly, the files are too large for github pages. Instead the non-interactive heat maps are given below. If you'd like to see the interactive html files I am happy to share them with you.
 
