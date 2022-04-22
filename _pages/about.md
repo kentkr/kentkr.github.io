@@ -10,7 +10,7 @@ My career entry into data science and engineering was not necessarily out of the
 
 # My current position
 
-I currently work as a data scientist at Vanderbilt University Medical Center, in the Department of Genetics and Bioinformatics, under the guidance of Douglas Ruderfer. My focus in Doug's lab centers around integrating wearable device data (from garmins, apple watches, etc) and ecological momentary assessments of depression and anxiety into the medical records. I manage this study and all the data associated with it which involves developing ETL pipelines and a SQLite database for us and collaborators to utilize. Other projects related to building features for a suicide risk prediction model and gene-environment interaction studies of phenotypes derived from the medical records using natural language processing. These phenotypes center around child abuse and other social determinants of health.
+I currently work as a data scientist at Vanderbilt University Medical Center, in the Department of Genetics and Bioinformatics, under the guidance of Douglas Ruderfer. My focus in Doug's lab centers around integrating wearable device data (from garmins, apple watches, etc) and ecological momentary assessments of depression and anxiety into the medical records. I manage this study and all the data associated with it which involves developing ETL pipelines and a SQLite database for us and collaborators to utilize. My other projects relate to building features for a suicide risk prediction model and gene-environment interaction studies of phenotypes derived from the medical records using natural language processing. These phenotypes center around child abuse and other social determinants of health.
 
 # Side projects
 
