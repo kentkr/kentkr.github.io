@@ -316,12 +316,12 @@ all_rides_avgs.dtypes.apply(lambda x: x.name).to_dict()
 all_rides_avgs.to_csv('/Users/kylekent/Desktop/research/CS_misc/GitHub/strava_project/all_rides_avgs2.csv.gz', index = False, compression = 'gzip')
 ```
 
-# Plotting interactive data with plotly
+# Plotting GPS data with plotly
 
-Despite my desire to learn interactive plotting with python, my love for
-ggplot and its simple conversion to plotly forced my hand to using r for
-this section. First, the files from all my rides and the aggregate file
-were loaded into the r. I forgot to convert a few of the units from
+Originally I planned to show interactive plots of a GPS heatmap for all my rides. Sadly, the files are too large for github pages. Instead the non-interactive heat maps are given below. If you'd like to see the interactive html files I am happy to share them with you.
+
+To display the GPS data, the files from all my rides and the aggregate file
+were loaded into the r and plotted with ggplot. I forgot to convert a few of the units from
 metric to imperial and a few variables needed to be added to work with
 plotly. My choice of data formatting is to use data.tables because of
 its syntax and efficiency with large datasets.
@@ -394,7 +394,7 @@ ggplot(avg.rides[avg_speed >= 5,.(speed = mean(avg_speed, na.rm = T)), year],
   ylab(label = 'Speed (mph)')
 ```
 
-![](assets/images/strava_project_md_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](/assets/images/strava_project_md_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 The same narrative arises when we look at my distance rode each year. A
 steady increase until 2015, then a drop during school. Although 2022 is
@@ -410,7 +410,7 @@ ggplot(avg.rides[,.(year_distance = sum(ride_distance, na.rm = T)), year],
   ylab(label = 'Distance (mi)')
 ```
 
-![](assets/images/strava_project_md_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](/assets/images/strava_project_md_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 The following bargraph outlines how many miles I rode each month for
 every year that I have data on. There are clear peaks and troughs from
@@ -431,9 +431,9 @@ ggplot(avg.rides[, .(month_abr = format(timestamp, '%b'), ride_distance, year)][
   ylab(label = 'Distance (mi)')
 ```
 
-![](assets/images/strava_project_md_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](/assets/images/strava_project_md_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
-Another interestin relationship to analyze is the difference between the
+Another interesting relationship to analyze is the difference between the
 average speed of each ride by distance. I expected a curvilinear
 relationship where a few short rides (eg warming up for races) and long
 rides would have low average speeds. Turns out, as I got stronger my
@@ -450,9 +450,9 @@ ggplot(avg.rides,
   xlab('Ride distance (mi)')
 ```
 
-![](assets/images/strava_project_md_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](/assets/images/strava_project_md_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
-Now for the interactive plotting! From 2012-2016 I lived in Scottsdale,
+From 2012-2016 I lived in Scottsdale,
 Arizona so most of my riding happened around there. Below is a heat map
 of GPS data from those rides. You can see that most rides were loops,
 but some have low density strings that finish in high density loops.
@@ -480,7 +480,7 @@ phx.heatmap <- ggplot(all.rides[(position_lat >= 33 & position_lat <= 35) & (pos
 phx.heatmap
 ```
 
-![](assets/images/strava_project_md_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+![](/assets/images/strava_project_md_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
 ``` r
 #p1 <- ggplotly(phx.heatmap, tooltip = 'text')
@@ -514,9 +514,6 @@ saveWidget(ggplotly(phxInteractive),
            file = '/Users/kylekent/Library/CloudStorage/Dropbox/cycling_analytics/html_plots/phxInteractive.html')
 ```
 
-<iframe src="/assets/images/strava_project_md_files/html_plots/phxInteractive.html" height="600px" width="100%" style="border:none;">
-</iframe>
-
 During my college years I lived in one of the best places to ride your
 bike in the country, Boulder, CO. These rides are less frequent but I
 still got out quite a bit and was able to explore other parts of
@@ -541,7 +538,7 @@ CO.heatmap <- ggplot(all.rides[(position_lat >= 39 & position_lat <= 41) & (posi
 CO.heatmap
 ```
 
-![](assets/images/strava_project_md_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+![](/assets/images/strava_project_md_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
 
 I hope you enjoyed analyzing my bike rides with me and thank you for
 taking the time to do so!
