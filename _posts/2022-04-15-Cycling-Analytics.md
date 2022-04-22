@@ -482,38 +482,6 @@ phx.heatmap
 
 ![](/assets/images/strava_project_md_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
-``` r
-#p1 <- ggplotly(phx.heatmap, tooltip = 'text')
-
-#saveWidget(ggplotly(p1), 
-#           file = '/Users/kylekent/Library/CloudStorage/Dropbox/cycling_analytics/html_plots/phx_heatmap.html')
-```
-
-``` r
-# make the phoenix plot interactive, only use data from 2015
-index2015 <- unique(all.rides[(position_lat >= 33 & position_lat <= 35) & (position_long >= -113 & position_long <= -111) & (timestamp >= '2015-01-01' & timestamp <= '2015-12-31')]$file_index)
-phxInteractive <- ggplot(all.rides[file_index %in% index2015[1:10]], 
-                      aes(x = position_lat, y = position_long,
-                          group = file_index,
-                          text = paste0('Date: ', date, '\n',
-                                        'Distance(mi): ', round(ride_distance, 1), '\n',
-                                        'Duration(hr): ', round(duration, 1), '\n',
-                                        'Avg speed(mph): ', round(avg_speed, 1), '\n',
-                                        'Elevation gain(ft): ', round(sum_elevation_gain)))) +
-  geom_path(aes(group = file_index), alpha = .1) +
-  xlim(33.2, 33.90) +
-  ylim(-112.35, -111.525) +
-  coord_flip() +
-  labs(title = 'An interactive heatmap of some of my bike rides in Phoenix, Arizona') +
-  xlab('Longitude') +
-  ylab('Latitude')
-
-phxInteractive <- ggplotly(phxInteractive, tooltip = 'text')
-
-saveWidget(ggplotly(phxInteractive), 
-           file = '/Users/kylekent/Library/CloudStorage/Dropbox/cycling_analytics/html_plots/phxInteractive.html')
-```
-
 During my college years I lived in one of the best places to ride your
 bike in the country, Boulder, CO. These rides are less frequent but I
 still got out quite a bit and was able to explore other parts of
