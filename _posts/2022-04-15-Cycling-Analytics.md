@@ -3,7 +3,7 @@ classes: wide
 ---
 
 This is an analysis I did back in 2020 which was recently updated to
-included new data up to April 2020. Please check it out and compare it
+included new data up to April 2022. Please check it out and compare it
 to my trading algorithm which implements more programming best
 practices.
 
