@@ -10,6 +10,8 @@ Divinity is a trading algorithm built from scratch that uses two technical indic
 
 [Introduction to divinity](https://kentkr.github.io/Divinity-introduction/)
 
+[How to install divinity](https://kentkr.github.io/Install-divinity/)
+
 # Legal disclaimer
 
 Divinity should not be used for or taken as financial advice. It is in beta testing and does not claim to be profitable. Investing and day trading has inherent financial risks associated with it that need to be taken into account.
