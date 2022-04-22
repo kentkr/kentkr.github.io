@@ -16,5 +16,5 @@ I currently work as a data scientist at Vanderbilt University Medical Center, in
 
 As was stated in the about me section, I love to learn, and programming really brings that out in me. For instance, during my undergraduate research days I would find myself spending more time than I had alloted for my research because of how R captivated me. Learning tidyr, testing it against data.tables, or learing new plotting layers with ggplot. The best part? It's productive and you can create extremely useful tools from it.
 
-So, to learn python, automation with cloud computers (AWS), and other useful tools, I spent a few hours a week building a trading algorithm divinity. To learn more about it please check out the divinity tab of this webpage.
+So, to learn python, automation with cloud computers (AWS), and other useful tools, I spent a few hours a week building a trading algorithm divinity. To learn more about it please check out the [divinity tab](https://kentkr.github.io/divinity/) of this webpage.
 
